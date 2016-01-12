@@ -22,11 +22,12 @@ namespace Control_Monad_ST {
 
   struct STObject {
     any data;
+    STObject(const any& d) : data(d) {}
   };
 
   inline auto newSTRef(const any& val) -> any {
     return [=]() -> any {
-      return any::make_shared<STObject>({val});
+      return any::make_shared<STObject>(val);
     };
   }
 
