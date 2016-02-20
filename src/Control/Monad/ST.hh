@@ -38,23 +38,19 @@ namespace Control_Monad_ST {
     };
   }
 
-  inline auto modifySTRef(const any& ref) -> any {
-    return [=](const any& f) -> any {
-      return [=]() -> any {
-        auto object = ref.cast<any::shared<STObject>>();
-        object->data = f(object->data);
-        return ref;
-      };
+  inline auto $modifySTRef(const any& ref, const any& f) -> any {
+    return [=]() -> any {
+      auto object = ref.cast<any::shared<STObject>>();
+      object->data = f(object->data);
+      return ref;
     };
   }
 
-  inline auto writeSTRef(const any& ref) -> any {
-    return [=](const any& a) -> any {
-      return [=]() -> any {
-        auto object = ref.cast<any::shared<STObject>>();
-        object->data = a;
-        return ref;
-      };
+  inline auto $writeSTRef(const any& ref, const any& a) -> any {
+    return [=]() -> any {
+      auto object = ref.cast<any::shared<STObject>>();
+      object->data = a;
+      return ref;
     };
   }
 
