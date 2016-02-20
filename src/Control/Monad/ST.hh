@@ -38,7 +38,7 @@ namespace Control_Monad_ST {
     };
   }
 
-  inline auto $modifySTRef(const any& ref, const any& f) -> any {
+  inline auto modifySTRef(const any& ref, const any& f) -> any {
     return [=]() -> any {
       auto object = ref.cast<any::shared<STObject>>();
       object->data = f(object->data);
@@ -46,7 +46,7 @@ namespace Control_Monad_ST {
     };
   }
 
-  inline auto $writeSTRef(const any& ref, const any& a) -> any {
+  inline auto writeSTRef(const any& ref, const any& a) -> any {
     return [=]() -> any {
       auto object = ref.cast<any::shared<STObject>>();
       object->data = a;
