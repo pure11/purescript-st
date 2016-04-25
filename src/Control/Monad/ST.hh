@@ -33,23 +33,23 @@ namespace Control_Monad_ST {
 
   inline auto readSTRef(const any& ref) -> any {
     return [=]() -> any {
-      const auto& object = ref.cast<any::shared<STObject>>();
-      return object->data;
+      const STObject& object = cast<STObject>(ref);
+      return object.data;
     };
   }
 
   inline auto modifySTRef(const any& ref, const any& f) -> any {
     return [=]() -> any {
-      auto object = ref.cast<any::shared<STObject>>();
-      object->data = f(object->data);
+      STObject& object = cast<STObject>(ref);
+      object.data = f(object.data);
       return ref;
     };
   }
 
   inline auto writeSTRef(const any& ref, const any& a) -> any {
     return [=]() -> any {
-      auto object = ref.cast<any::shared<STObject>>();
-      object->data = a;
+      STObject& object = cast<STObject>(ref);
+      object.data = a;
       return ref;
     };
   }
