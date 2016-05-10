@@ -27,7 +27,7 @@ namespace Control_Monad_ST {
 
   inline auto newSTRef(const any& val) -> any {
     return [=]() -> any {
-      return any::make_shared<STObject>(val);
+      return make_managed<STObject>(val);
     };
   }
 
